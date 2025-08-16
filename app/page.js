@@ -6,6 +6,8 @@ import PhoneMockup from "@/components/PhoneMockup";
 import UserCount from "@/components/UserCount";
 import InteractiveBackground from "@/components/InteractiveBackground";
 import AudioToggle from "@/components/AudioToggle";
+import Link from "next/link";
+
 // ESKİ WordCycle yerine stabil sürümü kullanıyoruz
 import WordCycleStable from "@/components/WordCycleStable";
 // Pembe blur arkaplanı ayrı komponent
@@ -137,12 +139,13 @@ export default function Home() {
 
         {/* Sade CTA'lar */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto max-w-xs sm:max-w-none">
-          <a
-            href="#features"
+          <Link
+            href="/early-access"
             className="w-full sm:w-auto text-center bg-pink-500 text-black font-semibold px-6 py-3 rounded-full shadow-lg hover:scale-105 transition"
           >
             Hemen Katıl
-          </a>
+          </Link>
+
           <a
             href="#about"
             className="w-full sm:w-auto text-center bg-transparent border border-pink-400 font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-pink-500 hover:text-black transition"

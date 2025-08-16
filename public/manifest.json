@@ -1,0 +1,22 @@
+{
+  "packageName": "app.memric",
+  "latest": {
+    "versionName": "1.0.0",
+    "versionCode": 100,
+    "apkUrl": "/downloads/memric-early-access.apk",
+    "size": "38.4 MB",
+    "sha256": "92DA48A011C1B1DD1C00CCE2DF36E2D0E9CAD18A",
+    "notes": [
+      "İlk erken erişim build’i",
+      "Günlük sorular + tematik sohbet",
+      "Temel bildirim ve kayıt akışı"
+    ]
+  },
+  "history": [
+    {
+      "versionName": "1.0.0",
+      "versionCode": 100,
+      "date": "2025-08-16"
+    }
+  ]
+}
