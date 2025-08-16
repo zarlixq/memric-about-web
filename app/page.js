@@ -6,7 +6,10 @@ import PhoneMockup from "@/components/PhoneMockup";
 import UserCount from "@/components/UserCount";
 import InteractiveBackground from "@/components/InteractiveBackground";
 import AudioToggle from "@/components/AudioToggle";
-import WordCycle from "@/components/WordCycle";
+// ESKİ WordCycle yerine stabil sürümü kullanıyoruz
+import WordCycleStable from "@/components/WordCycleStable";
+// Pembe blur arkaplanı ayrı komponent
+import BackgroundBlobs from "@/components/BackgroundBlobs";
 
 // Swiper (wrap slider)
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -80,29 +83,36 @@ export default function Home() {
       <InteractiveBackground />
       <AudioToggle />
 
+      {/* Pembe blur arkaplan efektleri (mobilde daha küçük) */}
+      <BackgroundBlobs />
+
       {/* Hero */}
-      <section className="flex flex-col items-center justify-center min-h-[80vh] text-center px-4 pt-[env(safe-area-inset-top)] relative z-10">
+      <section className="relative z-10 flex flex-col items-center justify-center min-h-[75vh] sm:min-h-[85vh] text-center px-4 pt-[env(safe-area-inset-top)]">
         {/* Marjinal giriş: soru */}
         <motion.p
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9 }}
-          className="text-sm tracking-wider uppercase text-pink-300/80 mb-3"
+          className="text-xs sm:text-sm tracking-wider uppercase text-pink-300/80 mb-2 sm:mb-3"
         >
           Bugün kiminle gerçekten bağ kuracaksın?
         </motion.p>
 
-        {/* Başlık + animasyonlu kelime */}
+        {/* Başlık + stabil kelime animasyonu */}
         <motion.h1
-          initial={{ opacity: 0, y: -40 }}
+          initial={{ opacity: 0, y: -24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9 }}
-          className="text-3xl sm:text-5xl font-bold mb-3 sm:mb-4 leading-tight"
+          transition={{ duration: 0.7 }}
+          className="text-[28px] leading-tight sm:text-5xl font-bold mb-3 sm:mb-4"
         >
           Gelecek{" "}
-          <WordCycle
-            words={["bir soru ile", "cesur bir sohbetle", "düşünerek", "seninle"]}
-          />{" "}
+          {/* mobilde alt satır, sm ve üstünde aynı satır → layout shift yok */}
+          <span className="block sm:inline">
+            <WordCycleStable
+              words={["bir soru ile", "cesur bir sohbetle", "düşünerek", "seninle"]}
+              interval={2200}
+            />
+          </span>{" "}
           başlar.
         </motion.h1>
 
