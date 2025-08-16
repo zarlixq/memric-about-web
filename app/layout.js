@@ -21,8 +21,8 @@ export const metadata = {
   description:
     "Memric; günlük sorular ve tematik sohbetlerle yeni insanlarla bağ kurmanı ve kendini keşfetmeni sağlar.",
   icons: {
-    icon: "/images/memriclogo.png",      // favicon (public/images/memriclogo.png)
-    apple: "/images/memriclogo.png",     // iOS kısayol ikonu
+    icon: "/images/memriclogo.png",      // favicon (512x512 önerilir)
+    apple: "/images/memriclogo.png",     // iOS için kısayol ikonu
   },
   openGraph: {
     type: "website",
@@ -31,13 +31,19 @@ export const metadata = {
     description:
       "Günlük sorularla düşün, tematik sohbetlerle bağ kur. Memric ile farklı hayatlara dokun.",
     siteName: "Memric",
-    images: ["/images/memriclogo.png"],  // OG görseli
+    images: [
+      {
+        url: "/images/memriclogo.png",
+        width: 512,
+        height: 512,
+        alt: "Memric Logo",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Memric – Sosyal Bağ & Kişisel Gelişim",
-    description:
-      "Günlük sorular ve tematik sohbetlerle keşfet.",
+    description: "Günlük sorular ve tematik sohbetlerle keşfet.",
     images: ["/images/memriclogo.png"],
   },
   robots: { index: true, follow: true },
