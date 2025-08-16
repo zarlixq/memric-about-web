@@ -21,9 +21,10 @@ export const metadata = {
   description:
     "Memric; günlük sorular ve tematik sohbetlerle yeni insanlarla bağ kurmanı ve kendini keşfetmeni sağlar.",
   icons: {
-    icon: "/images/memriclogo.png",      // favicon (512x512 önerilir)
-    apple: "/images/memriclogo.png",     // iOS için kısayol ikonu
+  icon: "/favicon.png",       // favicon
+  apple: "/favicon.png",      // iOS shortcut icon
   },
+
   openGraph: {
     type: "website",
     url: "https://memric.app",
