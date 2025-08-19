@@ -21,10 +21,9 @@ export const metadata = {
   description:
     "Memric; günlük sorular ve tematik sohbetlerle yeni insanlarla bağ kurmanı ve kendini keşfetmeni sağlar.",
   icons: {
-  icon: "/favicon.png",       // favicon
-  apple: "/favicon.png",      // iOS shortcut icon
+    icon: "/favicon.png",
+    apple: "/favicon.png",
   },
-
   openGraph: {
     type: "website",
     url: "https://memric.app",
@@ -52,8 +51,33 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="tr">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html
+      lang="tr"
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* eklentilerin enjekte ettiği bis_* attribute’larını temizle */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(){
+                try {
+                  var clean = function(el){
+                    if (!el || !el.getAttributeNames) return;
+                    el.getAttributeNames().forEach(function(n){
+                      if (/^bis_/i.test(n)) el.removeAttribute(n);
+                    });
+                  };
+                  clean(document.documentElement);
+                  clean(document.body);
+                } catch(e){}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="antialiased" suppressHydrationWarning>
         {children}
       </body>
     </html>

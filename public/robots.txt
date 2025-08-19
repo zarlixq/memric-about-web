@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://memric.app
+
+# Sitemaps
+Sitemap: https://memric.app/sitemap.xml
