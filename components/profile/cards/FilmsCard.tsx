@@ -36,14 +36,14 @@ export default function FilmCard({
       {favorite_movies.length > 0 && (
         <div className="mb-6">
           <h3 className="font-semibold text-neutral-100 mb-3">Favori Filmler</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="flex gap-4 overflow-x-auto md:grid md:grid-cols-3 md:gap-6 scrollbar-hide">
             {favorite_movies.map((m) => (
               <a
                 key={m.id}
                 href={m.external_url || "#"}
                 target="_blank"
                 rel="noreferrer"
-                className="flex flex-col items-center gap-2 hover:opacity-90 transition cursor-pointer"
+                className="flex-shrink-0 w-28 flex flex-col items-center gap-2 hover:opacity-90 transition cursor-pointer"
               >
                 <img
                   src={m.image}
@@ -63,14 +63,14 @@ export default function FilmCard({
       {favorite_series.length > 0 && (
         <div className="mb-6">
           <h3 className="font-semibold text-neutral-100 mb-3">Favori Diziler</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="flex gap-4 overflow-x-auto md:grid md:grid-cols-3 md:gap-6 scrollbar-hide">
             {favorite_series.map((s) => (
               <a
                 key={s.id}
                 href={s.external_url || "#"}
                 target="_blank"
                 rel="noreferrer"
-                className="flex flex-col items-center gap-2 hover:opacity-90 transition cursor-pointer"
+                className="flex-shrink-0 w-28 flex flex-col items-center gap-2 hover:opacity-90 transition cursor-pointer"
               >
                 <img
                   src={s.image}
@@ -90,14 +90,14 @@ export default function FilmCard({
       {favorite_actors.length > 0 && (
         <div>
           <h3 className="font-semibold text-neutral-100 mb-3">Favori Oyuncular</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="flex gap-4 overflow-x-auto md:grid md:grid-cols-3 md:gap-6 scrollbar-hide">
             {favorite_actors.map((a) => (
               <a
                 key={a.id}
                 href={a.external_url || "#"}
                 target="_blank"
                 rel="noreferrer"
-                className="flex flex-col items-center gap-2 hover:opacity-90 transition cursor-pointer"
+                className="flex-shrink-0 w-28 flex flex-col items-center gap-2 hover:opacity-90 transition cursor-pointer"
               >
                 <img
                   src={a.image}

@@ -34,7 +34,7 @@ export default function MusicCard({
 }: Props) {
   const openInSpotify = (url?: string) => {
     if (!url) return;
-    window.open(url, "_blank"); // direkt webde açar
+    window.open(url, "_blank");
   };
 
   return (
@@ -73,11 +73,12 @@ export default function MusicCard({
       {favorite_songs.length > 0 && (
         <div className="mb-6">
           <h3 className="font-semibold text-neutral-100 mb-3">En Sevdiğim Şarkılar</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          {/* Mobil: yatay scroll, PC: grid */}
+          <div className="flex gap-4 overflow-x-auto md:grid md:grid-cols-3 md:gap-6 scrollbar-hide">
             {favorite_songs.map((s) => (
               <div
                 key={s.id}
-                className="flex flex-col items-center gap-2 cursor-pointer"
+                className="flex-shrink-0 w-28 flex flex-col items-center gap-2 cursor-pointer"
                 onClick={() => openInSpotify(s.external_url)}
               >
                 <img
@@ -99,11 +100,11 @@ export default function MusicCard({
       {listened_artists?.length > 0 && (
         <div className="mt-6">
           <h3 className="font-semibold text-neutral-100 mb-3">En Sevdiğim Sanatçılar</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="flex gap-4 overflow-x-auto md:grid md:grid-cols-3 md:gap-6 scrollbar-hide">
             {listened_artists.map((a) => (
               <div
                 key={a.id}
-                className="flex flex-col items-center gap-2 cursor-pointer"
+                className="flex-shrink-0 w-28 flex flex-col items-center gap-2 cursor-pointer"
                 onClick={() => openInSpotify(a.external_url)}
               >
                 <img
