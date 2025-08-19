@@ -10,12 +10,16 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY! // anon key yeterli
 );
 
-export async function GET(
-  _req: NextRequest,
-  ctx: { params: { username: string } } // <— destrüktüre etme
-) {
+// ✅ Next.js 15 ile uyumlu context tipi
+interface RouteContext {
+  params: {
+    username: string;
+  };
+}
+
+export async function GET(_req: NextRequest, context: RouteContext) {
   try {
-    const { username } = ctx.params;
+    const { username } = context.params;
     console.log("📩 API isteği geldi, username:", username);
 
     // 1) user
@@ -37,7 +41,10 @@ export async function GET(
 
     if (!user) {
       console.warn("⚠️ Kullanıcı bulunamadı:", username);
-      return NextResponse.json({ error: "Kullanıcı bulunamadı" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Kullanıcı bulunamadı" },
+        { status: 404 }
+      );
     }
 
     if (user.is_hidden) {
@@ -67,7 +74,10 @@ export async function GET(
     // toplu hata log (isteği yine de 200 döndürüyoruz)
     const qErrors = [e1, e2, e3, e4, e5, e6].filter(Boolean);
     if (qErrors.length) {
-      console.warn("ℹ️ Bazı listeler çekilirken uyarı:", qErrors.map((x) => x?.message));
+      console.warn(
+        "ℹ️ Bazı listeler çekilirken uyarı:",
+        qErrors.map((x) => x?.message)
+      );
     }
 
     const payload = {
