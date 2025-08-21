@@ -57,21 +57,21 @@ export default function Home() {
       {
         title: "Günlük Sorular",
         text:
-          "Her gün karşınıza çıkan özel sorular, hem kendinizi keşfetmenizi hem de farklı bakış açılarıyla düşünmenizi sağlar. Bu sorular, toplulukta yeni sohbetlerin başlangıç noktasıdır ve yanıtlarınız profilinizle entegre şekilde saklanır.",
+          "Her gün karşınıza çıkan özel sorular, hem kendinizi keşfetmenizi hem de farklı bakış açılarıyla düşünmenizi sağlar",
         image: "/images/daily-question.png",
         reverse: true,
       },
       {
-        title: "Tematik Sohbetler",
+        title: "Sohbet Şablonları",
         text:
-          "Ortak ilgi alanlarına sahip kişilerle eşleşip 24 saat süreli özel sohbet odalarında buluşabilirsiniz. Sohbetler, seçtiğiniz temaya uygun sorular ve içeriklerle desteklenir, böylece iletişim daha verimli ve odaklı olur.",
+          "Konuşmak istediğiniz kişiye davet gönderin ve konuşacağınız konuyu seçtiğiniz şablon belirlesin. Kullanım şekli; uygulama üzerinden istediğiniz kullanıcıya davet gönderin kabul ettikten sonra sohbetlerinize yeni bir oda açılır, bu oda da iki kullanıcıya oyun gibi aynı sorular sorulur. Şablon bittikten sonra veya başladıktan 24 saat sonra sohbetiniz silinir.",
         image: "/images/thematic-chat.png",
         reverse: false,
       },
       {
         title: "Gezegen Hikayeleri (Wrap Sistemi)",
         text:
-          "Memric’in wrap sistemi, astroloji ve kişisel gelişimi harmanlayan interaktif bir hikâye akışıdır. 7 aşamadan oluşur: giriş ve 6 farklı gezegen yorumu. Her gezegen, kişiliğinizin farklı bir yönünü keşfetmenizi sağlar. Story bar yapısıyla ilerleme durumunuzu takip edebilir, istediğiniz aşamada durup devam edebilirsiniz.",
+          "Memric’in wrap sistemi, yalnızca iki kullanıcı doğum bilgilerini tam doldurduktan sonra aktif olur. Kullanım amacı, iki kişinin arasındaki astrolojik uyumu ve ortak deneyimi özel bir formatta sunmaktır.",
         reverse: true,
         isWrap: true,
       },
@@ -107,15 +107,15 @@ export default function Home() {
           transition={{ duration: 0.7 }}
           className="text-[28px] leading-tight sm:text-5xl font-bold mb-3 sm:mb-4"
         >
-          Gelecek{" "}
+          Memricle{" "}
           {/* mobilde alt satır, sm ve üstünde aynı satır → layout shift yok */}
           <span className="block sm:inline">
             <WordCycleStable
-              words={["bir soru ile", "cesur bir sohbetle", "düşünerek", "seninle"]}
+              words={["tanışmak", "kendini ifade etmek", "sohbet etmek", "kendin olmak"]}
               interval={2200}
             />
           </span>{" "}
-          başlar.
+          Kolaylaşır.
         </motion.h1>
 
         <motion.p
@@ -124,7 +124,7 @@ export default function Home() {
           transition={{ delay: 0.25, duration: 0.9 }}
           className="max-w-xl sm:max-w-2xl text-base sm:text-lg mb-6 sm:mb-8 text-gray-300"
         >
-          Memric’te cevap ver, farklı hayatlarla kesiş. Düşün, konuş, ilerle.
+          Memric’le kendini özgün ifade et 
         </motion.p>
 
         {/* Sayaç */}
@@ -176,9 +176,11 @@ export default function Home() {
           transition={{ delay: 0.15, duration: 0.7 }}
           className="text-base sm:text-lg max-w-3xl mx-auto text-gray-300"
         >
-          Memric, sosyal bağlantılar ile kişisel gelişimi birleştiren yenilikçi bir platformdur.
-          Sadece sohbet etmek değil; anlamlı sorularla düşünmek, yeni insanlarla tanışmak ve
-          kendini geliştirmek için tasarlandı. İster günlük sorularla kendini keşfet, ister tematik sohbetler ile farklı bakış açıları kazan.
+          Memric, sosyal bağlantılar ile astrolojiyi birleştiren yenilikçi bir platformdur. Sadece sohbet etmek değil; sohbet ettiğiniz konuyu düşünmek zorunda olmadığınız 
+          yeni insanlarla tanışmayı eğlenceli ve hızlı hale getirmek için tasarlandı. tanımak istediğin kişiyle astrolojik uyumuna bakın ve birbirinizin hakkında fikir sahibi olun
+          yada sizi tanımayanlar kişiler için bir sanal cv oluşturun 
+
+
         </motion.p>
       </section>
 
