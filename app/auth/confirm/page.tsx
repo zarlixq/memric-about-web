@@ -1,4 +1,4 @@
-// server component (DİKKAT: "use client" yok)
+// server component — burada *config* var, "use client" YOK
 export const dynamic = "force-dynamic"; // prerender etme
 export const revalidate = 0;            // cache alma
 
@@ -7,11 +7,13 @@ import ConfirmClient from "./ConfirmClient";
 
 export default function Page() {
   return (
-    <Suspense fallback={
-      <main className="min-h-screen grid place-items-center">
-        <div className="opacity-70">Doğrulanıyor…</div>
-      </main>
-    }>
+    <Suspense
+      fallback={
+        <main className="min-h-screen grid place-items-center">
+          <div className="opacity-70">Doğrulanıyor…</div>
+        </main>
+      }
+    >
       <ConfirmClient />
     </Suspense>
   );

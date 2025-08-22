@@ -9,29 +9,33 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
+type VerifyType = "signup" | "email_change" | "recovery" | "magiclink";
 type State = "loading" | "ok" | "error";
 
 export default function ConfirmClient() {
   const sp = useSearchParams();
   const router = useRouter();
 
-  const token_hash = sp.get("token_hash");
-  const type = (sp.get("type") as "signup" | "email_change" | "recovery" | "magiclink") || "signup";
+  // Supabase bazen `token_hash`, bazen `token` gönderir; ikisini de destekle
+  const tokenHash = sp.get("token_hash") ?? sp.get("token");
+  const type = (sp.get("type") as VerifyType) || "signup";
 
   const [state, setState] = useState<State>("loading");
-  const [msg, setMsg] = useState("");
+  const [msg, setMsg] = useState<string>("");
 
   useEffect(() => {
-    if (!token_hash) {
+    if (!tokenHash) {
       router.replace("/");
       return;
     }
 
     let cancelled = false;
-
     (async () => {
       try {
-        const { error } = await supabase.auth.verifyOtp({ token_hash, type });
+        const { error } = await supabase.auth.verifyOtp({
+          token_hash: tokenHash,
+          type,
+        });
         if (cancelled) return;
 
         if (error) {
@@ -39,7 +43,10 @@ export default function ConfirmClient() {
           setMsg(error.message || "Bağlantı geçersiz ya da süresi dolmuş.");
           return;
         }
+
         setState("ok");
+        // İstersen 2 sn sonra login'e gönder:
+        // setTimeout(() => router.push("/login"), 2000);
       } catch (e: any) {
         if (cancelled) return;
         setState("error");
@@ -47,12 +54,12 @@ export default function ConfirmClient() {
       }
     })();
 
-    return () => { cancelled = true; };
-  }, [token_hash, type, router]);
+    return () => {
+      cancelled = true;
+    };
+  }, [tokenHash, type, router]);
 
-  if (state === "loading") {
-    return null; // fallback'i server'daki Suspense gösteriyor
-  }
+  if (state === "loading") return null; // Fallback'i Suspense gösteriyor
 
   if (state === "error") {
     return (
@@ -60,14 +67,6 @@ export default function ConfirmClient() {
         <div className="max-w-md w-full border rounded-2xl p-6 text-center">
           <h1 className="text-xl font-semibold mb-2">Doğrulama başarısız</h1>
           <p className="opacity-80 mb-4">{msg}</p>
-          <div className="flex gap-2 justify-center">
-            <button onClick={() => router.push("/login")} className="px-4 py-2 border rounded-lg">
-              Girişe dön
-            </button>
-            <button onClick={() => router.push("/register")} className="px-4 py-2 bg-black text-white rounded-lg">
-              Yeni bağlantı al
-            </button>
-          </div>
         </div>
       </main>
     );
