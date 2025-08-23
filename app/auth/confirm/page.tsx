@@ -1,4 +1,4 @@
-// server component — burada *config* var, "use client" YOK
+// server component — burada config var, "use client" yok
 export const dynamic = "force-dynamic"; // prerender etme
 export const revalidate = 0;            // cache alma
 
