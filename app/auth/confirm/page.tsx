@@ -1,6 +1,5 @@
-// server component — burada config var, "use client" yok
-export const dynamic = "force-dynamic"; // prerender etme
-export const revalidate = 0;            // cache alma
+export const dynamic = "force-dynamic"; 
+export const revalidate = 0;            
 
 import { Suspense } from "react";
 import ConfirmClient from "./ConfirmClient";

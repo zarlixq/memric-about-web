@@ -16,8 +16,8 @@ export default function ConfirmClient() {
   const sp = useSearchParams();
   const router = useRouter();
 
-  const code = sp.get("code"); // OAuth/code-exchange yolu
-  const tokenHash = sp.get("token_hash") ?? sp.get("token"); // OTP yolu
+  const code = sp.get("code"); // email confirm link → ?code=...
+  const tokenHash = sp.get("token_hash") ?? sp.get("token"); // OTP link → ?token_hash=...
   const rawType = sp.get("type") as VerifyType | null;
   const type: VerifyType =
     (["signup","email_change","recovery","magiclink"].includes(String(rawType))
@@ -33,35 +33,35 @@ export default function ConfirmClient() {
 
     (async () => {
       try {
-        if (code) {
-          // 1) CODE EXCHANGE (Supabase confirm linklerinin çoğu buradan geliyor)
-          const { error } = await supabase.auth.exchangeCodeForSession(code);
-          if (cancelled) return;
-          if (error) {
-            setState("error");
-            setMsg(error.message || "Kod geçersiz ya da süresi dolmuş.");
-            return;
-          }
-          setState("ok");
-          return;
-        }
+        let error = null;
 
         if (tokenHash) {
-          // 2) OTP / TOKEN_HASH
-          const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type });
-          if (cancelled) return;
-          if (error) {
-            setState("error");
-            setMsg(error.message || "Bağlantı geçersiz ya da süresi dolmuş.");
-            return;
-          }
-          setState("ok");
-          return;
+          // token_hash akışı
+          const { error: e } = await supabase.auth.verifyOtp({
+            type,
+            token_hash: tokenHash,
+          });
+          error = e;
+        } else if (code) {
+          // code akışı (signup confirm linkleri)
+          // @ts-ignore: supabase-js docs'ta mevcut ama tip tanımında eksik
+          const { error: e } = await supabase.auth.verifyOtp({
+            type,
+            token: code,
+          });
+          error = e;
+        } else {
+          error = { message: "Gerekli parametre bulunamadı." };
         }
 
-        // 3) Hiç parametre yoksa
-        setState("error");
-        setMsg("Gerekli parametre bulunamadı.");
+        if (cancelled) return;
+
+        if (error) {
+          setState("error");
+          setMsg(error.message || "Bağlantı geçersiz ya da süresi dolmuş.");
+        } else {
+          setState("ok");
+        }
       } catch (e: any) {
         if (cancelled) return;
         setState("error");
