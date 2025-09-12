@@ -229,7 +229,7 @@ export default function Home() {
         ))}
       </section>
 
-      {/* Alt CTA */}
+      {/* Bilgi & Güven Alanı */}
       <section className="flex flex-col items-center justify-center py-16 sm:py-20 text-center px-4 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 10 }}
@@ -238,15 +238,36 @@ export default function Home() {
           transition={{ duration: 0.7 }}
           className="text-2xl sm:text-4xl font-bold mb-5 sm:mb-6 text-pink-400"
         >
-          Yolculuğa Hazır mısın?
+          Bizimle Güvende Ol
         </motion.h2>
-        <a
-          href="#features"
-          className="bg-pink-500 text-black font-semibold px-7 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:scale-105 transition"
-        >
-          🚀 Başlat
-        </a>
+        <p className="max-w-2xl text-gray-300 mb-6 sm:mb-8 text-base sm:text-lg">
+          Memric’te gizliliğiniz önceliğimizdir. Verileriniz koruma altında, sohbetleriniz sadece size özeldir. 
+          Daha fazla bilgi için aşağıdaki bağlantılara göz atabilirsiniz.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Link
+            href="/privacy"
+            className="text-pink-400 hover:text-pink-200 underline"
+          >
+            Gizlilik Politikası
+          </Link>
+          <Link
+            href="/eula"
+            className="text-pink-400 hover:text-pink-200 underline"
+          >
+            Kullanıcı Sözleşmesi (EULA)
+          </Link>
+        </div>
       </section>
+      {/* Footer */}
+      <footer className="bg-[#0a0a0d] border-t border-zinc-800 py-8 text-center text-sm text-gray-400">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p>© {new Date().getFullYear()} Memric. Tüm hakları saklıdır.</p>
+          <div className="flex gap-6">
+            <Link href="/support" className="hover:text-pink-400 transition">İletişim-destek</Link>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
